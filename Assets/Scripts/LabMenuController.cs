@@ -10,7 +10,7 @@ public class LabMenuController : MonoBehaviour
     [SerializeField] GameObject addReagentButton;
 
     [Header("make reagent")]
-    [SerializeField] GameObject makeReagentButton;
+    [SerializeField] GameObject startCraftingButton;
 
     LabController labCon;
 
@@ -19,7 +19,7 @@ public class LabMenuController : MonoBehaviour
     }
 
     private void Update() {
-        makeReagentButton.SetActive(!labCon.hasReagent && labCon.canCraft);
+        startCraftingButton.SetActive(!labCon.hasReagent);
 
         endDayButton.SetActive(!labCon.hasReagent);
         addReagentButton.SetActive(labCon.hasReagent);

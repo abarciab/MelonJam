@@ -9,7 +9,7 @@ public class InfoDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI dayDisplay;
 
     [Header("Ingredients")]
-    [SerializeField] string saltPrefix = "Day ";
+    [SerializeField] Ingredient saltIngrd;
     [SerializeField] TextMeshProUGUI saltDisplay;
     GameManager gMan;
     LabController labCon;
@@ -17,6 +17,9 @@ public class InfoDisplay : MonoBehaviour
     [Header("VirusStats")]
     [SerializeField] string salinityPrefix = "Salinity: ";
     [SerializeField] TextMeshProUGUI virusSalinity;
+
+    [Space()]
+    [SerializeField] TextMeshProUGUI currentReagent;
 
     private void Start() {
         gMan = GameManager.i;
@@ -26,7 +29,7 @@ public class InfoDisplay : MonoBehaviour
     }
 
     private void Update() {
-        saltDisplay.text = saltPrefix + labCon.salt;
+        saltDisplay.text = saltIngrd.prefix + labCon.GetIngredientCount(saltIngrd);
         virusSalinity.text = salinityPrefix + gMan.virus.salinity + "%";
     }
 
