@@ -30,7 +30,7 @@ public class IngredientSelector : MonoBehaviour
     List<Ingredient> currentlySelected = new List<Ingredient>();
 
     private void Start() {
-        GameManager.i.OnDayStart.AddListener(() => gameObject.SetActive(false));
+        GameManager.i.OnDayEnd.AddListener(() => gameObject.SetActive(false));
     }
 
     private void OnEnable() {
@@ -73,7 +73,7 @@ public class IngredientSelector : MonoBehaviour
 
     void SpawnButtons() {
         buttons.Clear();
-        var ingrds = GameManager.i.labCon.GetResources();
+        var ingrds = GameManager.i.labCon.GetIngredients();
 
         foreach (var entry in ingrds) {
             if (entry.Value <= 0) continue;

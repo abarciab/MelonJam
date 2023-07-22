@@ -8,12 +8,13 @@ public class Resource : MonoBehaviour
     [SerializeField] int amount;
     [SerializeField] Color fullColor, emptyColor;
 
-    bool collectible;
+    protected bool collectible;
     SpriteRenderer sRend;
 
-    private void Start() {
-        GameManager.i.OnDayStart.AddListener(ResetResource);
+    protected virtual void Start() {
+        GameManager.i.OnDayEnd.AddListener(ResetResource);
         sRend = GetComponent<SpriteRenderer>();
+        collectible = true;
     }
 
     private void Update() {
@@ -24,7 +25,7 @@ public class Resource : MonoBehaviour
         collectible = true;
     }
 
-    private void OnMouseDown() {
+    protected virtual void OnMouseDown() {
         if (!collectible) return;
         collectible = false;
 

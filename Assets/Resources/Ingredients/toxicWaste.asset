@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68cf79d6a5ca4a94b8ee86042d571822, type: 3}
-  m_Name: greenSalt
+  m_Name: toxicWaste
   m_EditorClassIdentifier: 
-  prefix: 'salt: '
+  prefix: 'toxic waste:'

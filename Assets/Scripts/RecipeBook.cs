@@ -9,7 +9,7 @@ public class RecipeBook : MonoBehaviour
     {
         [HideInInspector] public string name;
         public List<Ingredient> input;
-        public string output;
+        public Reagent output;
         public int priority;
         public bool strict = true;
     }
@@ -24,7 +24,7 @@ public class RecipeBook : MonoBehaviour
 
     [SerializeField] List<Recipe> recipes = new List<Recipe>();
 
-    public List<string> CheckIngredients(List<Ingredient> ingredients) {
+    public List<Reagent> CheckIngredients(List<Ingredient> ingredients) {
         List<Recipe> validOptions = new List<Recipe>();
 
         foreach (var recipe in recipes) {
@@ -44,8 +44,8 @@ public class RecipeBook : MonoBehaviour
         return sortedOutput;
     }
 
-    List<string> SortByPriority(List<Recipe> input) {
-        var sorted = new List<string>();
+    List<Reagent> SortByPriority(List<Recipe> input) {
+        var sorted = new List<Reagent>();
 
         while (input.Count > 0) {
             int highest = -1;
@@ -57,7 +57,7 @@ public class RecipeBook : MonoBehaviour
                 }
             }
             input.Remove(best);
-            sorted.Insert(sorted.Count, best.output);
+            sorted.Add(best.output);
         }
         return sorted;
     }

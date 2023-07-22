@@ -8,7 +8,7 @@ public class LabController : MonoBehaviour
     [SerializeField, Range(0, 1)] float sucsessChance;
 
     Dictionary<Ingredient, int> resources = new Dictionary<Ingredient, int>();
-    public bool hasReagent { get; private set; }
+    public Reagent curentReagent { get; private set; }
     
     GameManager gMan;
     RecipeBook recipes;
@@ -18,14 +18,14 @@ public class LabController : MonoBehaviour
         else resources.Add(ingrd, 1);
     }
 
-    public Dictionary<Ingredient, int> GetResources() {
+    public Dictionary<Ingredient, int> GetIngredients() {
         return resources;
     }
 
     private void Start() {
         recipes = FindAnyObjectByType<RecipeBook>();
         gMan = GameManager.i;
-        gMan.OnDayStart.AddListener(onDayStart);
+        gMan.OnDayEnd.AddListener(onDayStart);
     }
 
     public int GetIngredientCount(Ingredient ingrd) {
@@ -42,33 +42,32 @@ public class LabController : MonoBehaviour
     }
 
     void onDayStart() {
-        hasReagent = false;
+        curentReagent = null;
     }
 
     public void AttemptCraft(List<Ingredient> selectedIngrds) {
         RemoveIngredient(selectedIngrds);
 
         var validOptions = recipes.CheckIngredients(selectedIngrds);
-        string chosenOutput = validOptions[0];
+        Reagent chosenOutput = validOptions[0];
 
         float roll = Random.Range(0.0f, 1);
         if (roll < sucsessChance) CraftSuccsess(chosenOutput);
         else CraftFail(validOptions[validOptions.Count-1]);        
     }
 
-    void CraftFail(string output) {
-        print("crafted " + output);
-        print("Crafting fail");
+    void CraftFail(Reagent output) {
+        print("failed");
+        curentReagent = output;
     }
 
-    void CraftSuccsess(string output) {
-        print(output);
-        hasReagent = true;
+    void CraftSuccsess(Reagent output) {
+        curentReagent = output;
     }
 
     public void UseReagent() {
-        hasReagent = false;
-        gMan.virus.addReagent();
+        gMan.virus.addReagent(curentReagent);
+        curentReagent = null;
     }
 
 }

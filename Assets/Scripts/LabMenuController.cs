@@ -19,9 +19,9 @@ public class LabMenuController : MonoBehaviour
     }
 
     private void Update() {
-        startCraftingButton.SetActive(!labCon.hasReagent);
+        startCraftingButton.SetActive(!labCon.curentReagent);
 
-        endDayButton.SetActive(!labCon.hasReagent);
-        addReagentButton.SetActive(labCon.hasReagent);
+        endDayButton.SetActive(!labCon.curentReagent);
+        addReagentButton.SetActive(labCon.curentReagent);
     }
 }
