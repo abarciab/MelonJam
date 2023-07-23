@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ecosystem : MonoBehaviour
 {
-    public enum CreatureType { Plankton, medFish, shark, seaMonster}
+    public enum CreatureType { Plankton, medFish, bigFish, shark, seaMonster}
 
     //controls the spawning, pause/play, and virus interaction in the lake
 

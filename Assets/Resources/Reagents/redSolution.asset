@@ -20,4 +20,8 @@ MonoBehaviour:
   - type: 2
     amount: 10
   icon: {fileID: 21300000, guid: 5520982b159bbed40b3da874199d188f, type: 3}
-  info: 
+  info: 'increase agression
+
+    decrease lethality
+
+    increase infectivity'

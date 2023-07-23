@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects: []
   icon: {fileID: 21300000, guid: 57032ac620992c04ba4ccddcb18cb1e9, type: 3}
-  info: 
+  info: no effect

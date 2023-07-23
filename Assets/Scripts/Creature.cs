@@ -47,6 +47,19 @@ public class Creature : MonoBehaviour
         if (status == Status.healthy) CheckInfection();
         if (status == Status.infected) CheckMutation();
         if (status == Status.infected) CheckAgro();
+        if (status != Status.healthy) CheckLethality();
+    }
+
+    void CheckLethality() {
+        float roll = Random.Range(0.0f, 1);
+        if (gMan.virus.aggression / 100 > roll) ChangeStatus(Status.healthy);
+        if (status != Status.healthy) return;
+
+        print("Cured!");
+
+        sRend.color = Color.white;
+        if (agroTrail) agroTrail.SetActive(false);
+        if (mutattionParticles) mutattionParticles.SetActive(false);
     }
 
     void CheckAgro() {
