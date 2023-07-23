@@ -16,8 +16,8 @@ public class ToxicFish : Resource
         transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
-    protected override void OnMouseDown() {
-        base.OnMouseDown();
+    public override void Harvest() {
+        base.Harvest();
         Destroy(gameObject);
     }
 }

@@ -9,7 +9,13 @@ public class Plankton : Creature
     [SerializeField] Vector2 rotSpeedRange = new Vector2(-30, 30), rotTimeRange = new Vector2(0, 4);
     float rotTime, rotSpeed, delataRot;
 
-    private void Update() {
+    protected override void Start() {
+        base.Start();
+        transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+    }
+
+    protected override void Update() {
+        base.Update();
         delataRot = Mathf.Lerp(delataRot, rotSpeed, 0.05f); 
 
         transform.eulerAngles += new Vector3(0, 0, delataRot * Time.deltaTime);

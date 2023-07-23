@@ -8,20 +8,27 @@ public class ConfrontationController : MonoBehaviour
     [SerializeField] int numAgents;
 
     [SerializeField] int dayResetTime = 2;
+    [SerializeField] float susThreshold = 1;
     int dayCountdown;
+    bool ready;
 
     private void Start() {
-        dayCountdown = dayResetTime;
-        GameManager.i.OnDayEnd.AddListener(Tick);
+       
+        GameManager.i.OnDayEnd.AddListener(Check);
     }
 
-    void Tick() {
-        dayCountdown -= 1;
-        if (dayCountdown <= 0) StartConfrontation();
+    void Check() {
+        if (ready) StartConfrontation();
+        else if (GameManager.i.suspicion > susThreshold) PrepareConfrontation();
+    }
+
+    void PrepareConfrontation() {
+        ready = true;
+        FindObjectOfType<EventController>().DontSendInspectorTomorrow();
     }
 
     void StartConfrontation() {
-        dayCountdown = dayResetTime;
+        ready = false;
         display.StartConfrontation(numAgents);
     }
 

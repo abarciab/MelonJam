@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -12,7 +13,9 @@ public class InfoDisplay : MonoBehaviour
     LabController labCon;
 
     [Space()]
-    [SerializeField] TextMeshProUGUI currentReagent;
+    [SerializeField] Image currentReagentIcon;
+    [SerializeField] TextMeshProUGUI currentReagentName, currentReagentInfo;
+    [SerializeField] GameObject currentReagentParent;
 
     private void Start() {
         gMan = GameManager.i;
@@ -22,7 +25,10 @@ public class InfoDisplay : MonoBehaviour
     }
 
     private void Update() {
-        currentReagent.text = labCon.curentReagent ? labCon.curentReagent.name : "";
+        currentReagentName.text = labCon.curentReagent ? labCon.curentReagent.name : "";
+        currentReagentInfo.text = labCon.curentReagent ? labCon.curentReagent.info : "";
+        currentReagentIcon.sprite = labCon.curentReagent ? labCon.curentReagent.icon : null;
+        currentReagentParent.SetActive(labCon.curentReagent);
     }
 
     public void UpdateDisplay() {

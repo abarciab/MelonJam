@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour
 {
-    public enum Status { healthy, infected, mutated};
+    public enum Status { healthy, infected, mutated, agro};
 
     Ecosystem.CreatureType type;
     Ecosystem eco;
     public Status status;
     GameManager gMan;
     protected SpriteRenderer sRend;
+    [SerializeField] protected Sprite mutatedSprite;
+    [SerializeField] float mutateScaleIncrease = 1.5f;
+    [SerializeField] GameObject mutattionParticles, agroTrail;
+
+    public virtual void Attack(float damage) { }
+
+    public virtual void OnWrapAround(bool top) {
+        StopAllCoroutines();
+        if (agroTrail && agroTrail.activeInHierarchy) StartCoroutine(StopThenStartTrail());
+    }
+
+    IEnumerator StopThenStartTrail() {
+        agroTrail.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        agroTrail.SetActive(true);
+    }
 
     public virtual void Init(Ecosystem _eco, Ecosystem.CreatureType _type, Status _status = Status.healthy) {
         eco = _eco;
@@ -26,7 +42,30 @@ public class Creature : MonoBehaviour
     }
 
     void Tick() {
+        if (!GameManager.i.virus.unlockedSpecies.Contains(type)) return;
+
         if (status == Status.healthy) CheckInfection();
+        if (status == Status.infected) CheckMutation();
+        if (status == Status.infected) CheckAgro();
+    }
+
+    void CheckAgro() {
+        float roll = Random.Range(0.0f, 1);
+        if (gMan.virus.aggression / 100 > roll) ChangeStatus(Status.agro);
+        if (status != Status.agro) return;
+
+        if (sRend) sRend.color = gMan.agroColor;
+    }
+
+    void CheckMutation() {
+        float roll = Random.Range(0.0f, 1);
+
+        if (gMan.virus.mutability / 100 > roll) ChangeStatus(Status.mutated);
+        if (status != Status.mutated) return;
+
+        if (sRend) sRend.sprite = mutatedSprite;
+        if (sRend) sRend.color = gMan.mutatedColor;
+        transform.localScale *= mutateScaleIncrease;
     }
 
     void CheckInfection() {
@@ -43,5 +82,10 @@ public class Creature : MonoBehaviour
 
     private void OnDestroy() {
         eco.RemoveStatusData(type, status);
+    }
+
+    protected virtual void Update() {
+        if (mutattionParticles) mutattionParticles.SetActive(status == Status.mutated);
+        if (agroTrail) agroTrail.SetActive(status == Status.agro);
     }
 }

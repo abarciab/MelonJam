@@ -9,6 +9,13 @@ public class LabController : MonoBehaviour
 
     Dictionary<Ingredient, int> resources = new Dictionary<Ingredient, int>();
     public Reagent curentReagent { get; private set; }
+
+    [SerializeField] List<Ingredient> allIngredients = new List<Ingredient>();
+    bool addedStarting;
+
+    [Space()]
+    [SerializeField] Sound makeReagentSound;
+    [SerializeField] Sound addReagentSound;
     
     GameManager gMan;
     RecipeBook recipes;
@@ -19,13 +26,31 @@ public class LabController : MonoBehaviour
     }
 
     public Dictionary<Ingredient, int> GetIngredients() {
+        if (!addedStarting) Start();
         return resources;
     }
 
+    public bool CanAfford(List<KeyValuePair<Ingredient, int>> costs) {
+        foreach (var c in costs) {
+            if (GetIngredientCount(c.Key) < c.Value) return false;
+        }
+        return true;
+    }
+
     private void Start() {
+        makeReagentSound = Instantiate(makeReagentSound);
+        addReagentSound = Instantiate(addReagentSound);
+
         recipes = FindAnyObjectByType<RecipeBook>();
         gMan = GameManager.i;
         gMan.OnDayEnd.AddListener(onDayStart);
+        foreach (var i in allIngredients) AddEmpty(i);
+        addedStarting = true;
+    }
+
+    void AddEmpty(Ingredient ingrd) {
+        if (resources.ContainsKey(ingrd)) return;
+        resources.Add(ingrd, 0);
     }
 
     public int GetIngredientCount(Ingredient ingrd) {
@@ -46,6 +71,7 @@ public class LabController : MonoBehaviour
     }
 
     public void AttemptCraft(List<Ingredient> selectedIngrds) {
+        makeReagentSound.Play();
         RemoveIngredient(selectedIngrds);
 
         var validOptions = recipes.CheckIngredients(selectedIngrds);
@@ -66,6 +92,7 @@ public class LabController : MonoBehaviour
     }
 
     public void UseReagent() {
+        addReagentSound.Play();
         gMan.virus.addReagent(curentReagent);
         curentReagent = null;
     }

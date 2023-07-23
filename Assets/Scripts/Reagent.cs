@@ -28,4 +28,7 @@ public class Reagent : ScriptableObject
     }
 
     public List<Effect> effects = new List<Effect>();
+    public Sprite icon;
+    [TextArea(2, 4)]
+    public string info;
 }

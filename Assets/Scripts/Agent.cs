@@ -4,36 +4,31 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
-    Map map;
-    [SerializeField] float inspectTime = 2, speed;
-    float inspectCooldown;
-    Vector3 targetPos;
-    bool moving, atShore;
+    protected Map map;
+    [SerializeField] float speed;
+    protected Vector3 targetPos;
+    protected bool moving;
+    public bool InWater;
 
-    private void Start() {
+    protected virtual void Start() {
         map = GameManager.i.map;
-        MoveTo(map.shore.position);
-        inspectCooldown = inspectTime;
     }
 
-    void MoveTo(Vector3 position) {
+    protected void MoveTo(Vector3 position) {
         targetPos = position;
         moving = true;
     }
 
-    private void Update() {
+    protected virtual void Update() {
         if (moving) {
             var dir = targetPos - transform.position;
             transform.position += dir.normalized * speed * Time.deltaTime;
             if (Vector2.Distance(transform.position, targetPos) < 0.1f) {
                 moving = false;
-                if (targetPos == map.shore.position) atShore = true;
-                else Destroy(gameObject);
+                OnReachDestination();
             }
         }
-        else if (atShore) {
-            inspectCooldown -= Time.deltaTime;
-            if (inspectCooldown <= 0) MoveTo(map.station.position);
-        }
     }
+
+    protected virtual void OnReachDestination() {}
 }

@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class VirusController : MonoBehaviour
 {
-    public float infectivity { get; private set; }
-    public float mutability { get; private set; }
-    public float lethality { get; private set; }
 
-    public float aggression { get; private set; }
+    [Range(0, 100)] public float infectivity;
+    [Range(0, 100)] public float mutability;
+    [Range(0, 100)] public float lethality;
+    [Range(0, 100)] public float aggression;
+    public List<Ecosystem.CreatureType> unlockedSpecies = new List<Ecosystem.CreatureType>();
 
     public void addReagent(Reagent reagent) {
         foreach (var effect in reagent.effects) {
             ProcessEffect(effect);
         }
+    }
+
+    public void Unlock(Ecosystem.CreatureType Species) {
+        unlockedSpecies.Add(Species);
     }
 
     void ProcessEffect(Effect effect) {

@@ -8,8 +8,9 @@ public class Seaweed : Resource
     [SerializeField] int growthStage = 3;
     [SerializeField] Vector2 minMaxSize;
 
-    protected override void OnMouseDown() {
-        base.OnMouseDown();
+    public override void Harvest() {
+        base.Harvest();
+
         growthStage -= 1;
         growthStage = Mathf.Max(0, growthStage);
         if (growthStage > 0) collectible = true;
@@ -22,7 +23,7 @@ public class Seaweed : Resource
     }
 
     void Grow() {
-        growthStage += 1;
+        if (growthStage < minMaxSize.y) growthStage += 1;
     }
 
     private void Update() {

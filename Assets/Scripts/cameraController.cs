@@ -13,6 +13,10 @@ public class cameraController : MonoBehaviour
     [SerializeField] bool goUp;
     [SerializeField] bool goDown;
 
+    [Space()]
+    [SerializeField] Sound panUpSound;
+    [SerializeField] Sound panDownSound;
+
     private void Update() {
         if (Application.isPlaying) return;
 
@@ -36,6 +40,8 @@ public class cameraController : MonoBehaviour
         if (!Application.isPlaying) return;
         GameManager.i.OnDayEnd.AddListener(GoUp);
         downYPos = transform.position.y;
+        panUpSound = Instantiate(panUpSound);
+        panDownSound = Instantiate(panDownSound);
     }
 
     public void GoUp() {
@@ -44,6 +50,7 @@ public class cameraController : MonoBehaviour
     }
 
     IEnumerator PanUp() {
+        panUpSound.Play();
         while (Mathf.Abs(transform.position.y - upYPos) > 0.01f) {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, upYPos, transform.position.z), moveSmoothness);
             yield return new WaitForEndOfFrame();
@@ -52,6 +59,7 @@ public class cameraController : MonoBehaviour
     }
 
     IEnumerator PanDown() {
+        panDownSound.Play();
         while (Mathf.Abs(transform.position.y - downYPos) > 0.01f) {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, downYPos, transform.position.z), moveSmoothness);
             yield return new WaitForEndOfFrame();

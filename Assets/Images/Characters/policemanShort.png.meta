@@ -128,10 +128,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 1024
+        width: 350
+        height: 630
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: policemanShort_1
       rect:
         serializedVersion: 2
-        x: 512
-        y: 392
-        width: 512
-        height: 632
+        x: 350
+        y: 0
+        width: 350
+        height: 630
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,27 +160,6 @@ TextureImporter:
       bones: []
       spriteID: 51f747aa448e157479b8721fcd597a79
       internalID: 969857234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: policemanShort_2
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 435
-        width: 512
-        height: 589
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 552836a362c7b9943889900f4b4be292
-      internalID: 745144924
       vertices: []
       indices: 
       edges: []
@@ -198,7 +177,6 @@ TextureImporter:
     nameFileIdTable:
       policemanShort_0: -2115785753
       policemanShort_1: 969857234
-      policemanShort_2: 745144924
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

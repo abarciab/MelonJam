@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UISwitchController : MonoBehaviour
 {
-    [SerializeField] GameObject labParent, HUDparent, continueButton;
+    [SerializeField] GameObject labParent, HUDparent, navButtons, workshop, CommandCenter, upButtons, continueButton;
 
     private void Start() {
         GameManager.i.OnDayEnd.AddListener(HideUI);
@@ -12,14 +12,24 @@ public class UISwitchController : MonoBehaviour
     }
 
     void HideUI() {
-        labParent.SetActive(false);
-        HUDparent.SetActive(false);
-        continueButton.SetActive(false);
+        ShowHideUI(false);
+    }
+
+    void ShowHideUI(bool active) {
+        labParent.SetActive(active);
+        HUDparent.SetActive(active);
+        continueButton.SetActive(active);
+        navButtons.SetActive(active);
+        workshop.SetActive(active);
+        CommandCenter.SetActive(active);
+        upButtons.SetActive(!active);
     }
 
     public void GoDown() {
-        labParent.SetActive(true);
         HUDparent.SetActive(true);
+        navButtons.SetActive(true);
+        upButtons.SetActive(false);
+
         continueButton.SetActive(false);
         Camera.main.GetComponent<cameraController>().GoDown();
         GameManager.i.OnGoDown.Invoke();
