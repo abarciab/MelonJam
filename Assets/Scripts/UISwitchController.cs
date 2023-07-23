@@ -27,7 +27,7 @@ public class UISwitchController : MonoBehaviour
 
     public void GoDown() {
         HUDparent.SetActive(true);
-        navButtons.SetActive(true);
+        labParent.SetActive(true);
         upButtons.SetActive(false);
 
         continueButton.SetActive(false);

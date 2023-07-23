@@ -9,20 +9,18 @@ public class PoliceMan : Agent
     bool atShore;
     List<Vector3> patrolPositions = new List<Vector3>();
 
-
-
     [Header("Combat")]
     [SerializeField] float health;
     [SerializeField] float attackDamage, attackResetTime, knockBack, iFrameTime, normalGravity, bigGravity, dashForce, dashResetTime;
     float maxHealth, attackCooldown, iframeCooldown, dashCooldown;
-    bool inCombat;
+    bool inCombat, fought;
     Rigidbody2D rb;
 
     protected override void Start() {
         base.Start();
         MoveTo(map.shore.position);
-        //inspectCooldown = inspectTime;
         patrolPositions = map.GetPatrolPositions();
+        health *= GameManager.i.policeDifficulty;
         maxHealth = health;
         rb = GetComponent<Rigidbody2D>();
         normalGravity = rb.gravityScale;
@@ -34,6 +32,11 @@ public class PoliceMan : Agent
         dashCooldown -= Time.deltaTime;
 
         if (iframeCooldown > 0) return;
+
+        if (inCombat && GameManager.i.eco.CheckOnlyStatus(Creature.Status.agro) == 0) {
+            inCombat = false;
+            fought = true;
+        }
 
         base.Update();
         if (inCombat) {
@@ -52,7 +55,7 @@ public class PoliceMan : Agent
     }
 
     void DoCombat() {
-        rb.gravityScale = GameManager.i.map.waterline.position.y < transform.position.y ? bigGravity : normalGravity;
+        rb.gravityScale = map.waterline.position.y < transform.position.y ? bigGravity : normalGravity;
 
         if (dashCooldown <= 0) Dash();
     }
@@ -88,14 +91,21 @@ public class PoliceMan : Agent
         base.OnReachDestination();
         if (targetPos == map.shore.position) atShore = true;
 
-        else if (targetPos == map.station.position) Destroy(gameObject);
+        else if (targetPos == map.station.position) {
+            if (fought) GameManager.i.CopWon();
+            else GameManager.i.CopSurvived();
+            Destroy(gameObject);
+        }
     }
 
     //this is called when someone attacks this guy
     public void Attack(float damage, Vector2 sourcePos) {
         if (iframeCooldown > 0) return;
         health -= damage;
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0) {
+            GameManager.i.CopDied();
+            Destroy(gameObject);
+        }
         inCombat = true;
 
         iframeCooldown = iFrameTime;
@@ -126,7 +136,7 @@ public class PoliceMan : Agent
         if (attackCooldown >= 0) return;
         var creature = obj.GetComponent<Creature>();
         if (creature && creature.status == Creature.Status.agro) {
-            creature.Attack(attackDamage);
+            creature.Attack(attackDamage * GameManager.i.policeDifficulty);
             attackCooldown = attackResetTime;
         }
     }

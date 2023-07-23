@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6231068758682591408}
   - component: {fileID: -2923733171020879891}
   - component: {fileID: 8502213075939915447}
+  - component: {fileID: 1699532499691136133}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   InWater: 0
   inspectTime: 6
   health: 20
-  attackDamage: 0
+  attackDamage: 1.5
   attackResetTime: 1.5
   knockBack: 2
   iFrameTime: 0.1
@@ -133,6 +134,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1699532499691136133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2948171780603914463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c1ce44240ed4b49a128e16fb9bad20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj1: {fileID: 3057703095492420820}
+  obj2: {fileID: 4193072937615609395}
 --- !u!1 &3057703095492420820
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +159,6 @@ GameObject:
   - component: {fileID: 6773181836212740781}
   - component: {fileID: 6243360231231990375}
   - component: {fileID: 2866080636709387290}
-  - component: {fileID: 5999998498075219359}
   - component: {fileID: 5075140757693009622}
   m_Layer: 0
   m_Name: tall
@@ -265,20 +279,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5999998498075219359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3057703095492420820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5862f4a5470572e4abef32d6d16f111e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  InWater: 0
 --- !u!95 &5075140757693009622
 Animator:
   serializedVersion: 5

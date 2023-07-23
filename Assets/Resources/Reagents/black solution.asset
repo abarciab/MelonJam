@@ -14,14 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - type: 0
-    amount: 5
+    amount: 8
   - type: 3
-    amount: 5
-  - type: 2
-    amount: 5
+    amount: 3
   icon: {fileID: 21300000, guid: bb4a4a5743ba0e04aa1df35c8af84898, type: 3}
   info: 'increase mutabiity
 
-    increase agression
-
-    increase infectivity'
+    increase agression'

@@ -48,6 +48,10 @@ public class Creature : MonoBehaviour
 
         if (status == Status.healthy) CheckInfection();
         if (status == Status.infected) CheckMutation();
+        if (status == Status.mutated) {
+            CheckAgro();
+            if (status == Status.agro) transform.localScale /= mutateScaleIncrease;
+        }
         if (status == Status.infected) CheckAgro();
         if (status != Status.healthy) CheckLethality();
     }

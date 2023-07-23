@@ -9,15 +9,29 @@ public class Ecosystem : MonoBehaviour
      
     //controls the spawning, pause/play, and virus interaction in the lake
 
+    [Space()]
     [SerializeField] int planktonCount;
     [SerializeField] GameObject planktonPrefab;
     [SerializeField] SortingGroup planktonSGroup;
     [SerializeField] Transform planktonParent;
 
+    [Space()]
     [SerializeField] int medFishCount;
     [SerializeField] GameObject medFishPrefab;
     [SerializeField] SortingGroup medFishSGroup;
     [SerializeField] Transform medFishParent;
+
+    [Space()]
+    [SerializeField] int bigFishCount;
+    [SerializeField] GameObject bigFishPrefab;
+    [SerializeField] SortingGroup bigFishSGroup;
+    [SerializeField] Transform bigFishParent;
+
+    [Space()]
+    [SerializeField] int SharkCount;
+    [SerializeField] GameObject SharkPrefab;
+    [SerializeField] SortingGroup SharkSGroup;
+    [SerializeField] Transform SharkParent;
 
     [Space()]
     [SerializeField] Vector2 bounds;
@@ -33,6 +47,14 @@ public class Ecosystem : MonoBehaviour
 
     public bool TooHigh(Vector2 pos) {
         return pos.y > ( transform.position.y + ((bounds.y / 2) * 0.8f));
+    }
+
+    public int CheckOnlyStatus(Creature.Status status, bool countPlankton = false) {
+        int count = countPlankton ? CheckStatus(status, CreatureType.Plankton) : 0;
+        count += CheckStatus(status, CreatureType.medFish);
+        count += CheckStatus(status, CreatureType.shark);
+        count += CheckStatus(status, CreatureType.seaMonster);
+        return count;
     }
 
     public int CheckStatus(Creature.Status statusCheck, CreatureType creatureCheck) {
@@ -73,6 +95,8 @@ public class Ecosystem : MonoBehaviour
     void PauseMovement() {
         foreach (Transform child in planktonParent) PauseCreature(child);
         foreach (Transform child in medFishParent) PauseCreature(child);
+        foreach (Transform child in bigFishParent) PauseCreature(child);
+        foreach (Transform child in SharkParent) PauseCreature(child);
         HideShowCreatures(false);
     }
 
@@ -83,6 +107,8 @@ public class Ecosystem : MonoBehaviour
     void ResumeMovement() {
         foreach (Transform child in planktonParent) ResumeCreature(child);
         foreach (Transform child in medFishParent) ResumeCreature(child);
+        foreach (Transform child in bigFishParent) ResumeCreature(child);
+        foreach (Transform child in SharkParent) ResumeCreature(child);
         CheckCreatureLevels();
         HideShowCreatures(true);
     }    
@@ -94,6 +120,8 @@ public class Ecosystem : MonoBehaviour
     void CheckCreatureLevels() {
         if (planktonParent.childCount != planktonCount) FixPopulation(planktonCount, planktonParent, planktonPrefab, CreatureType.Plankton);
         if (medFishParent.childCount != medFishCount) FixPopulation(medFishCount, medFishParent, medFishPrefab, CreatureType.medFish);
+        if (bigFishParent.childCount != bigFishCount) FixPopulation(bigFishCount, bigFishParent, bigFishPrefab, CreatureType.bigFish);
+        if (SharkParent.childCount != SharkCount) FixPopulation(SharkCount, SharkParent, SharkPrefab, CreatureType.shark);
     }
 
     void FixPopulation(int goalCount, Transform parent, GameObject prefab, CreatureType species) {

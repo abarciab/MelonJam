@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - type: 1
-    amount: 10
-  - type: 3
-    amount: 10
-  - type: 2
     amount: -10
+  - type: 3
+    amount: -5
+  - type: 2
+    amount: -4
   icon: {fileID: 21300000, guid: 121ecce5e828b5c43bb878676b88972d, type: 3}
-  info: 'increase lethality
+  info: 'lowers lethality
 
     increase agression
 

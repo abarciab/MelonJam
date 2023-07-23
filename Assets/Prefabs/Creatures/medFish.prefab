@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   mutatedSprite: {fileID: 21300000, guid: 9c375cc542e17e04fb846600fdaa11ca, type: 3}
-  mutateScaleIncrease: 1.5
+  mutateScaleIncrease: 1.1
   mutattionParticles: {fileID: 5524252816270805294}
   agroTrail: {fileID: 7800348542898040583}
   ampRange: {x: 0.13, y: 0.18}
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3925363956017888526
 BoxCollider2D:
   m_ObjectHideFlags: 0

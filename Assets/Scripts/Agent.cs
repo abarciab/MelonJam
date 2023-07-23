@@ -12,6 +12,7 @@ public class Agent : MonoBehaviour
 
     protected virtual void Start() {
         map = GameManager.i.map;
+        transform.position = map.station.position;
     }
 
     protected void MoveTo(Vector3 position) {

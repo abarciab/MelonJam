@@ -14,6 +14,9 @@ public class MediumFish : Creature
     [SerializeField] float chaseSpeed;
     [SerializeField] float attackDamage, attackResetTime, health;
     float attackCooldown, maxHealth;
+
+    [Space()]
+    [SerializeField] Vector3 rotationOffset;
     
     public float GetHPPercent() {
         return health / maxHealth;
@@ -46,6 +49,11 @@ public class MediumFish : Creature
         Vector3 posDelta = new Vector3(speed * Time.deltaTime, Mathf.Sin(Time.time * Period) * amplitude * Time.deltaTime, 0);
         transform.position += posDelta;
         transform.right = Vector3.Lerp(transform.right, posDelta.normalized, 0.05f);
+        //transform.right = posDelta.normalized;
+        //transform.LookAt(transform.position + posDelta);
+        //transform.eulerAngles += rotationOffset;
+        
+        
 
         if (!mutated && status == Status.mutated) {
             mutated = true;

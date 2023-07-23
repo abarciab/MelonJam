@@ -26,16 +26,36 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Map map;
     [HideInInspector] public Resource HoveredResource;
 
+    public float policeDifficulty = 1, difficultyMod = 1.1f;
     public bool inCommandCenter;
     public bool aimingHook;
 
     public void EndGame() {
-        print("YOU LOSE");
+        headline.DisplayHeadline("After defeating the fish, police are able to investigate the lake floor...");
+        StartCoroutine(WaitThenEnd());
+    }
+
+    IEnumerator WaitThenEnd() {
+        yield return new WaitForSeconds(5);
         SceneManager.LoadScene(0);
     }
 
     public void IncreaseSuspicion(float amount) {
         suspicion += amount;
+    }
+
+    public void CopDied() {
+        headline.DisplayHeadline("Police killed by fish, will return with reinforcement");
+        policeDifficulty *= difficultyMod;
+    }
+
+    public void CopWon() {
+        if (suspicion > maxSuspicion - 2) EndGame();
+        else headline.DisplayHeadline("Police barely escape killer fish");
+    }
+
+    public void CopSurvived() {
+        headline.DisplayHeadline("Police notice nothing out of the ordinary");
     }
 
     private void Awake() {
