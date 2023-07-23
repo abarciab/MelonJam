@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public Transform shore, station;
+    public Transform shore, station, waterline, watterBottom, waterLeft, waterRight, waterCenter;
     [SerializeField] List<Transform> patrolPoints = new List<Transform>();
 
     public List<Vector3> GetPatrolPositions() {

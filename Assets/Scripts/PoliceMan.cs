@@ -9,27 +9,58 @@ public class PoliceMan : Agent
     bool atShore;
     List<Vector3> patrolPositions = new List<Vector3>();
 
-    [SerializeField] float health, attackDamage, attackResetTime;
-    float maxHealth, attackCooldown;
 
+
+    [Header("Combat")]
+    [SerializeField] float health;
+    [SerializeField] float attackDamage, attackResetTime, knockBack, iFrameTime, normalGravity, bigGravity, dashForce, dashResetTime;
+    float maxHealth, attackCooldown, iframeCooldown, dashCooldown;
+    bool inCombat;
+    Rigidbody2D rb;
 
     protected override void Start() {
         base.Start();
         MoveTo(map.shore.position);
-        inspectCooldown = inspectTime;
+        //inspectCooldown = inspectTime;
         patrolPositions = map.GetPatrolPositions();
         maxHealth = health;
+        rb = GetComponent<Rigidbody2D>();
+        normalGravity = rb.gravityScale;
     }
 
     protected override void Update() {
+        attackCooldown -= Time.deltaTime;
+        iframeCooldown -= Time.deltaTime;
+        dashCooldown -= Time.deltaTime;
+
+        if (iframeCooldown > 0) return;
+
         base.Update();
+        if (inCombat) {
+            moving = false;
+            DoCombat();
+            return;
+        }
+
         if (!moving) {
+
             inspectCooldown -= Time.deltaTime;
             if (inspectCooldown <= 0) {
                 MoveToNextPoint();
             }
         }
-        attackCooldown -= Time.deltaTime;
+    }
+
+    void DoCombat() {
+        rb.gravityScale = GameManager.i.map.waterline.position.y < transform.position.y ? bigGravity : normalGravity;
+
+        if (dashCooldown <= 0) Dash();
+    }
+
+    void Dash() {
+        dashCooldown = dashResetTime;
+        var dir = (GameManager.i.map.waterCenter.position - transform.position).normalized;
+        rb.AddForce(dir * dashForce, ForceMode2D.Impulse);
     }
 
     public float GetHPPercent() {
@@ -60,9 +91,22 @@ public class PoliceMan : Agent
         else if (targetPos == map.station.position) Destroy(gameObject);
     }
 
-    public void Attack(float damage) {
+    //this is called when someone attacks this guy
+    public void Attack(float damage, Vector2 sourcePos) {
+        if (iframeCooldown > 0) return;
         health -= damage;
         if (health <= 0) Destroy(gameObject);
+        inCombat = true;
+
+        iframeCooldown = iFrameTime;
+
+        KnockBack(sourcePos);
+        
+    }
+
+    void KnockBack(Vector2 sourcePos) {
+        var dir = (transform.position - (Vector3)sourcePos).normalized;
+        GetComponent<Rigidbody2D>().AddForce(dir * knockBack, ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -77,6 +121,7 @@ public class PoliceMan : Agent
         TryAttack(collision);
     }
 
+    //this is when this guy tries to attack others
     void TryAttack(Collider2D obj) {
         if (attackCooldown >= 0) return;
         var creature = obj.GetComponent<Creature>();

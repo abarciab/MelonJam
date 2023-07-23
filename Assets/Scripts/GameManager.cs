@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,11 @@ public class GameManager : MonoBehaviour
 
     public bool inCommandCenter;
     public bool aimingHook;
+
+    public void EndGame() {
+        print("YOU LOSE");
+        SceneManager.LoadScene(0);
+    }
 
     public void IncreaseSuspicion(float amount) {
         suspicion += amount;

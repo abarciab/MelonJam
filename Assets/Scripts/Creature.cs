@@ -14,6 +14,7 @@ public class Creature : MonoBehaviour
     [SerializeField] protected Sprite mutatedSprite;
     [SerializeField] float mutateScaleIncrease = 1.5f;
     [SerializeField] GameObject mutattionParticles, agroTrail;
+    Sprite originalSprite;
 
     public virtual void Attack(float damage) { }
 
@@ -37,6 +38,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Start() {
         sRend = GetComponent<SpriteRenderer>();
+        if (sRend) originalSprite = sRend.sprite;
         gMan = GameManager.i;
         gMan.OnDayEnd.AddListener(Tick);
     }
@@ -52,12 +54,11 @@ public class Creature : MonoBehaviour
 
     void CheckLethality() {
         float roll = Random.Range(0.0f, 1);
-        if (gMan.virus.aggression / 100 > roll) ChangeStatus(Status.healthy);
+        if (gMan.virus.lethality / 100 > roll) ChangeStatus(Status.healthy);
         if (status != Status.healthy) return;
 
-        print("Cured!");
-
         sRend.color = Color.white;
+        sRend.sprite = originalSprite;
         if (agroTrail) agroTrail.SetActive(false);
         if (mutattionParticles) mutattionParticles.SetActive(false);
     }

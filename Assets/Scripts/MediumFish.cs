@@ -73,7 +73,7 @@ public class MediumFish : Creature
             }
         }
 
-        MoveTo(closestCop);
+        if (attackCooldown <= 0) MoveTo(closestCop);
     }
 
     void MoveTo(Transform target) {
@@ -100,7 +100,7 @@ public class MediumFish : Creature
         if (attackCooldown >= 0) return;
         var police = obj.GetComponent<PoliceMan>();
         if (police) {
-            police.Attack(attackDamage);
+            police.Attack(attackDamage, transform.position);
             attackCooldown = attackResetTime;
         }
     }

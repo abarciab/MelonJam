@@ -1318,6 +1318,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: -2
   m_TargetDisplay: 0
+--- !u!1 &150165917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150165918}
+  m_Layer: 0
+  m_Name: waterLine(center)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &150165918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150165917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.71, y: -0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134926803}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &177508158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1607,7 +1638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.799988, y: -13}
+  m_AnchoredPosition: {x: -12.799988, y: 0}
   m_SizeDelta: {x: 31.5, y: 26.0596}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &203037378
@@ -2717,7 +2748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -1.3671265, y: 35}
+  m_AnchoredPosition: {x: -1.3671265, y: 0}
   m_SizeDelta: {x: 160, y: 45.640594}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360109495
@@ -8980,6 +9011,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454138762}
   m_CullTransparentMesh: 1
+--- !u!1 &468670487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468670488}
+  m_Layer: 0
+  m_Name: waterLine(bottom)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468670488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468670487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.03, y: -2.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134926803}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484463696
 GameObject:
   m_ObjectHideFlags: 0
@@ -11108,7 +11170,7 @@ MonoBehaviour:
   affordableColor: {r: 0, g: 0.5377358, b: 0.029522814, a: 0.36078432}
   unaffordableColor: {r: 1, g: 0, b: 0.09163618, a: 0.36078432}
   minWaitTime: 4
-  suspicion: 0
+  suspicion: 2
   maxSuspicion: 30
   OnDayEnd:
     m_PersistentCalls:
@@ -11157,11 +11219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b511b898c6f33b4d9585f008e43b341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infectivity: 2
+  infectivity: 7.6
   mutability: 0
   lethality: 0
   aggression: 0
-  unlockedSpecies: 00000000
+  unlockedSpecies: 0000000001000000
 --- !u!114 &663100734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11245,7 +11307,8 @@ MonoBehaviour:
   display: {fileID: 0}
   numAgents: 1
   dayResetTime: 2
-  susThreshold: 1
+  VisitTriggerThreshold: 1
+  findPlayerThreshold: 0
 --- !u!114 &663100736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12244,6 +12307,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797446980}
   m_CullTransparentMesh: 1
+--- !u!1 &799436729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799436730}
+  m_Layer: 0
+  m_Name: waterLine(top)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &799436730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799436729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.26, y: 1.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134926803}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &807317407
 GameObject:
   m_ObjectHideFlags: 0
@@ -14328,7 +14422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -23.75, y: -214}
+  m_AnchoredPosition: {x: -23.75, y: -211}
   m_SizeDelta: {x: -243.4195, y: -438.4759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1071535535
@@ -14395,6 +14489,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1071535535}
+--- !u!1 &1139349427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139349428}
+  m_Layer: 0
+  m_Name: waterLine(right)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1139349428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139349427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.05, y: -0.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134926803}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145261233
 GameObject:
   m_ObjectHideFlags: 0
@@ -16236,6 +16361,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shore: {fileID: 807317408}
   station: {fileID: 1054266920}
+  waterline: {fileID: 799436730}
+  watterBottom: {fileID: 468670488}
+  waterLeft: {fileID: 1481082056}
+  waterRight: {fileID: 1139349428}
+  waterCenter: {fileID: 150165918}
   patrolPoints:
   - {fileID: 525171412}
   - {fileID: 1042063458}
@@ -16822,6 +16952,37 @@ MonoBehaviour:
   goDown: 0
   panUpSound: {fileID: 11400000, guid: bb73d34ccb0faac4b8c1e33c6bcad035, type: 2}
   panDownSound: {fileID: 11400000, guid: d6c4b0881ed4fd64d8e68e401fc3d98e, type: 2}
+--- !u!1 &1481082055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1481082056}
+  m_Layer: 0
+  m_Name: waterLine(left)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1481082056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481082055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.41, y: -0.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2134926803}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1489016923
 GameObject:
   m_ObjectHideFlags: 0
@@ -19045,7 +19206,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -21789,6 +21950,11 @@ Transform:
   - {fileID: 1054266920}
   - {fileID: 525171412}
   - {fileID: 1042063458}
+  - {fileID: 799436730}
+  - {fileID: 468670488}
+  - {fileID: 1481082056}
+  - {fileID: 1139349428}
+  - {fileID: 150165918}
   m_Father: {fileID: 1396454546}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

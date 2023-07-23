@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ecosystem : MonoBehaviour
 {
     public enum CreatureType { Plankton, medFish, bigFish, shark, seaMonster}
-
+     
     //controls the spawning, pause/play, and virus interaction in the lake
 
     [SerializeField] int planktonCount;
@@ -30,6 +30,10 @@ public class Ecosystem : MonoBehaviour
     List<Creature> creatures = new List<Creature>();
 
     Dictionary<KeyValuePair<Creature.Status, CreatureType>, int> creatureStatusDict = new Dictionary<KeyValuePair<Creature.Status, CreatureType>, int>();
+
+    public bool TooHigh(Vector2 pos) {
+        return pos.y > ( transform.position.y + ((bounds.y / 2) * 0.8f));
+    }
 
     public int CheckStatus(Creature.Status statusCheck, CreatureType creatureCheck) {
         var key = new KeyValuePair<Creature.Status, CreatureType>(statusCheck, creatureCheck);
@@ -96,7 +100,9 @@ public class Ecosystem : MonoBehaviour
         while (parent.childCount < goalCount) {
             SpawnCreature(parent, prefab, species);
         }
-        while (parent.childCount > goalCount) {
+        int childrenLeft = parent.childCount;
+        while (childrenLeft > goalCount) {
+            childrenLeft -= 1;
             KillCreature(parent);
         }
     }
